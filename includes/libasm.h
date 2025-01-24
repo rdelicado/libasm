@@ -6,16 +6,19 @@
 /*   By: lxuxer <lxuxer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:11:51 by lxuxer            #+#    #+#             */
-/*   Updated: 2025/01/24 10:19:21 by lxuxer           ###   ########.fr       */
+/*   Updated: 2025/01/24 13:42:34 by lxuxer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBASM_H
 # define LIBASM_H
-
-# include <unistd.h>    
+    
 # include <stdlib.h>
-# include <sys/types.h> 
+# include <sys/types.h>
+# include <unistd.h>
+# include <errno.h>    
+# include <stdio.h>     
+# include <fcntl.h>
 
 // ----------- Prototipos de funciones obligatorias ----------------
 

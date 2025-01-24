@@ -32,6 +32,9 @@ fclean: clean
 re: fclean all
 
 test: all
-	gcc -no-pie main.c -I$(INC_DIR) -L. -lasm -o prueba && ./prueba
+	gcc -no-pie main.c -I$(INC_DIR) -L. -lasm -o prueba
+
+debug:
+	gdb -q obj/ft_putchar.o
 
 .PHONY: all clean fclean re test

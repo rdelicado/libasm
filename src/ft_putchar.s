@@ -4,8 +4,8 @@ section .text
 
 ft_putchar:
     ; --- Prólogo (prepara el entorno) ---
-    push rbp        ; Guarda el registro base anterior
-    mov rbp, rsp    ; Crea un nuevo marco de pila
+    push rbp        ; Guarda el valor de rbp (direccion de memoria a la que apunta)
+    mov rbp, rsp    ; Crea un nuevo marco de pila (rsp = rbp)
 
     ; --- Prepara la syscall write ---
     sub rsp, 1      ; Reserva 1 byte en la pila
@@ -13,7 +13,7 @@ ft_putchar:
 
     mov rax, 1      ; Syscall write = 1 (Linux)
     mov rdi, 1      ; stdout (pantalla)
-    mov rsi, rsp    ; Puntero al carácter en la pila
+    mov rsi, rsp    ; Puntero al carácter en la pila (rsi -> [rsp])
     mov rdx, 1      ; Escribir 1 byte
     syscall         ; ¡Ejecuta la syscall!
 
