@@ -1,6 +1,15 @@
-; ssize_t write(int fd, const void buf[.count], size_t count);
-; Parámetros: rdi = fd, rsi = buf, rdx = count.
-; Retorno: rax = bytes escritos (éxito), rax = -1 (error).
+; Function: ft_write
+; Prototype: ssize_t write(int fd, const void buf[.count], size_t count);
+; Brief: Writes up to 'count' bytes from the 'buf' to the file descriptor 'fd'.
+;        The [.count] in buf indicates that the buffer's usable size is determined by 'count'.
+; Registers:
+;   - rdi: File descriptor (fd).
+;   - rsi: Pointer to the buffer (buf).
+;   - rdx: Number of bytes to write (count).
+;   - rax: On return, holds the number of bytes written, or -1 if an error occurs.
+; Other details:
+;   - __errno_location is used to update the thread-specific error code on failure.
+;   - Standard calling conventions apply; the stack frame preserves necessary registers.
 
 section .text
     global ft_write
