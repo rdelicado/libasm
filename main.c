@@ -40,5 +40,7 @@ int main()
 {
     test_strlen();
 
+    ft_write(1, "hola", 4);
+
     return 0;
 }
