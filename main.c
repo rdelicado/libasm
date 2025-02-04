@@ -1,38 +1,44 @@
 #include "includes/libasm.h"
+#include <string.h>
+
+void    test_strlen()
+{
+    printf("#################### ft_strlen #####################\n");
+
+    // Normal string
+    char *s0 = "hola";
+
+    // String void
+    char *s1 = "";  
+
+    // Very long string
+    char s2[10001];
+    memset(s2, 'a', 10000);
+    s2[10000] = '\0';
+
+    // String with special characters
+    char *s3 = "Hello\nWorld\t!";
+
+    // String with embedded null (stops at first '\0');
+    char s4[10] = {'H','e','l','l','o','\0','W','o','r','l'};
+
+    char *arr[] = {s0, s1, s2, s3, s4, NULL};
+    int i = 0;
+    while (arr[i] != NULL)
+    {
+        size_t len = ft_strlen(arr[i]);
+        size_t orig_len = strlen(arr[i]);
+        printf("\n");
+        printf("result ft_strlen    (s%d): %zu\n", i, len);
+        printf("result strlen       (s%d): %zu\n", i, orig_len);
+        printf("_________________________________\n");
+        i++;
+    }
+}
 
 int main() 
 {
-    /* printf("#################### ft_puthcar #####################\n");
-    // --------------------- Caso exitoso ---------------------
-    ft_putchar('H');
-    ft_putchar('i');
-    ft_putchar('\n');
-
-    // --------------------- Caso de error ---------------------
-    // Cerramos stdout (descriptor 1) para forzar un error
-    close(1);
-
-    // Intentamos escribir en un descriptor cerrado (debería fallar)
-    int result = ft_putchar('E');
-    
-    if (result == -1) {
-        fprintf(stderr, "¡Error manejado correctamente!\n");
-        fprintf(stderr, "Código de error (errno): %d\n", errno);
-        perror("Mensaje del sistema");
-    }
-
-    // Reabrimos stdout
-    int fd = open("/dev/tty", O_WRONLY);
-    if (fd != -1) {
-        dup2(fd, 1);
-        close(fd);
-    }
- */
-
-    printf("#################### ft_strlen #####################\n");
-    char *s = "hola";
-    ft_strlen(s);
-
+    test_strlen();
 
     return 0;
 }

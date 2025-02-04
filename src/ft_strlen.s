@@ -6,9 +6,6 @@ section .text
     global ft_strlen
 
 ft_strlen:
-; preparar la pila
-    push    rbp
-    mov     rbp, rsp
     xor     rax, rax
 
 .loop:
@@ -18,9 +15,6 @@ ft_strlen:
     jmp .loop               ; Repite
 
 .end:
-    ; --- Limpieza final ---
-    mov     esp, ebp    ; restaurar esp
-    pop     rbp         ; Restaura el registro base
     ret                 ; ¡Retorna al programa!
 
 section .note.GNU-stack noalloc noexec nowrite progbits

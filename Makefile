@@ -24,7 +24,7 @@ all: $(NAME)
 
 clean:
 	$(RM) -r $(OBJ_DIR)
-	$(RM) prueba
+	$(RM) test
 
 fclean: clean
 	$(RM) $(NAME)
@@ -32,7 +32,7 @@ fclean: clean
 re: fclean all
 
 test: all
-	gcc -no-pie main.c -I$(INC_DIR) -L. -lasm -o prueba
+	gcc -no-pie main.c -I$(INC_DIR) -L. -lasm -o test
 
 debug:
 	gdb -q obj/ft_putchar.o
