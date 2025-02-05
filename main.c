@@ -1,5 +1,4 @@
 #include "includes/libasm.h"
-#include <string.h>
 
 void    test_strlen()
 {
@@ -36,11 +35,60 @@ void    test_strlen()
     }
 }
 
+void    test_write()
+{
+    printf("\n#################### ft_strlen #####################\n");
+
+    ssize_t ret_ft, ret_sys;
+    int saved_errno;
+    char *msg = "hola\n";
+
+    printf("\n== Test: Escritura con buffer vacío (count = 0) ==\n");
+    ret_ft = ft_write(1, "hola", 0);
+    ret_sys = write(1, "hola", 0);
+    printf("\nft_write returned: %zd\n", ret_ft);
+    printf("write returned:   %zd\n\n", ret_sys);
+
+    printf("== Test: Escritura en stdout (fd = 1) ==\n");
+    ret_ft = ft_write(1, msg, strlen(msg));
+    ret_sys = write(1, msg, strlen(msg));
+    printf("\nft_write returned: %zd\n", ret_ft);
+    printf("write returned:   %zd\n\n", ret_sys);
+
+    printf("== Test: Escritura en stderr (fd = 2) ==\n");
+    ret_ft = ft_write(2, "error\n", 6);
+    ret_sys = write(2, "error\n", 6);
+    printf("\nft_write returned: %zd\n", ret_ft);
+    printf("write returned:   %zd\n\n", ret_sys);
+
+    printf("== Test: Escritura con fd inválido (fd = -1) ==\n");
+    errno = 0;
+    ret_ft = ft_write(-1, "hola", 4);
+    saved_errno = errno;
+    printf("ft_write returned: %zd, errno: %d\n", ret_ft, saved_errno);
+
+    errno = 0;
+    ret_sys = write(-1, "hola", 4);
+    saved_errno = errno;
+    printf("write returned:   %zd, errno: %d\n", ret_sys, saved_errno);
+
+    printf("\n");
+    printf("== Test: Escritura con buffer nulo (buf = NULL) ==\n");
+    errno = 0;
+    ret_ft = ft_write(1, NULL, 5);
+    saved_errno = errno;
+    printf("ft_write returned: %zd, errno: %d\n", ret_ft, saved_errno);
+
+    errno = 0;
+    ret_sys = write(1, NULL, 5);
+    saved_errno = errno;
+    printf("write returned:   %zd, errno: %d\n", ret_sys, saved_errno);
+}
+
 int main() 
 {
     test_strlen();
-
-    ft_write(1, "hola", 4);
+    test_write();
 
     return 0;
 }

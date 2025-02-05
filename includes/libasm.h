@@ -6,7 +6,7 @@
 /*   By: lxuxer <lxuxer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:11:51 by lxuxer            #+#    #+#             */
-/*   Updated: 2025/02/04 16:37:23 by lxuxer           ###   ########.fr       */
+/*   Updated: 2025/02/05 20:21:24 by lxuxer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <errno.h>    
 # include <stdio.h>     
 # include <fcntl.h>
+# include <string.h>
 
 // ----------- Prototipos de funciones obligatorias ----------------
 
