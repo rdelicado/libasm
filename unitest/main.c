@@ -1,8 +1,12 @@
-#include "includes/libasm.h"
+#include "../includes/libasm.h"
+#include "../includes/test_utils.h"
+
+extern void test_ft_strlen(void);
+extern void test_ft_write(void);
 
 void    test_strlen()
 {
-    printf("#################### ft_strlen #####################\n");
+    printf(BLUE"\n#################### ft_strlen #####################\n"RESET);
 
     // Normal string
     char *s0 = "hola";
@@ -37,7 +41,7 @@ void    test_strlen()
 
 void    test_write()
 {
-    printf("\n#################### ft_strlen #####################\n");
+    printf(BLUE"\n#################### ft_strlen #####################\n"RESET);
 
     ssize_t ret_ft, ret_sys;
     int saved_errno;
@@ -87,6 +91,8 @@ void    test_write()
 
 int main() 
 {
+    test_ft_strlen();
+    test_ft_write();
     test_strlen();
     test_write();
 

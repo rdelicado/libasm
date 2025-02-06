@@ -1,22 +1,5 @@
-#include "includes/libasm.h"
-
-// Colores ANSI para la salida
-#define COLOR_BLUE    "\033[1;34m"
-#define COLOR_GREEN   "\033[1;32m"
-#define COLOR_RED     "\033[1;31m"
-#define COLOR_RESET   "\033[0m"
-
-void print_test_name(const char *name) {
-    printf(COLOR_BLUE "== Test: %s ==\n" COLOR_RESET, name);
-}
-
-void print_pass() {
-    printf(COLOR_GREEN "PASS" COLOR_RESET ": Test passed successfully.\n");
-}
-
-void print_fail(const char *message) {
-    printf(COLOR_RED "FAIL" COLOR_RESET ": %s\n", message);
-}
+#include "../includes/libasm.h"
+#include "test_utils.h"
 
 void test_empty_string() {
     print_test_name("Empty string");
@@ -95,7 +78,7 @@ void test_null_terminated_in_middle() {
     }
 }
 
-int main() {
+void test_ft_strlen() {
     test_empty_string();
     test_single_character();
     test_normal_string();
@@ -103,6 +86,4 @@ int main() {
     test_string_with_special_characters();
     test_long_string();
     test_null_terminated_in_middle();
-
-    return 0;
 }

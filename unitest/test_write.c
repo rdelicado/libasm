@@ -1,28 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <string.h>
-#include <errno.h>
-
-#define COLOR_BLUE    "\033[1;34m"
-#define COLOR_GREEN   "\033[1;32m"
-#define COLOR_RED     "\033[1;31m"
-#define COLOR_RESET   "\033[0m"
-
-extern ssize_t ft_write(int fd, const void *buf, size_t count);
-
-void print_test_name(const char *name) {
-    printf(COLOR_BLUE "== Test: %s ==\n" COLOR_RESET, name);
-}
-
-void print_pass() {
-    printf(COLOR_GREEN "PASS" COLOR_RESET ": Test passed successfully.\n");
-}
-
-void print_fail(const char *message) {
-    printf(COLOR_RED "FAIL" COLOR_RESET ": %s\n", message);
-}
+#include "../includes/libasm.h"
+#include "test_utils.h"
 
 void test_write_to_stdout() {
     print_test_name("Write to stdout");
@@ -133,7 +110,7 @@ void test_write_partial() {
     close(pipe_fds[0]);
 }
 
-int main() {
+void test_ft_write() {
     test_write_to_stdout();
     test_write_to_stderr();
     test_write_to_file();
@@ -141,6 +118,4 @@ int main() {
     test_write_with_invalid_fd();
     test_write_with_null_buffer();
     test_write_partial();
-
-    return 0;
 }
