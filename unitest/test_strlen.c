@@ -38,7 +38,7 @@ void test_string_with_spaces() {
     print_test_name("String with spaces");
     const char *str = "This is a test string.";
     size_t result = ft_strlen(str);
-    if (result != 21) {
+    if (result != 22) {
         print_fail("Expected length of 21 for 'This is a test string.'."); 
     } else {
         print_pass();
@@ -60,7 +60,7 @@ void test_long_string() {
     print_test_name("Long string");
     const char *str = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
     size_t result = ft_strlen(str);
-    if (result != 51) {
+    if (result != 56) {
         print_fail("Expected length of 51 for the given long string.");
     } else {
         print_pass();

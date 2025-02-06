@@ -29,12 +29,12 @@ ft_write:
     jge     .end      ; Si rax >= 0, todo bien, salta a .end
 
 .error:
-    neg     rax       ; Convierte a positivo el código de error
-    push    rax       ; Guarda el código de error en la pila
-    call    __errno_location wrt ..plt   ; Obtiene la dirección de errno
-    pop     rcx       ; Recupera el código de error en rcx
-    mov     [rax], ecx; Escribe el código de error en errno
-    mov     rax, -1   ; Establece el valor de retorno en -1 (error)
+    mov     r8, rax    ; Guarda el error (valor negativo) en r8
+    neg     r8         ; r8 = -rax: error positivo (ej. EBADF = 9)
+    call    __errno_location wrt ..plt  ; Obtiene la dirección de errno en rax
+    mov     dword [rax], r8d             ; Asigna el error correcto a errno
+    mov     rax, -1                     ; Devuelve -1 para indicar error
+    ret
 
 .end:
     ret               ; Retorna al llamador
