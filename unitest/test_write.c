@@ -110,7 +110,9 @@ void test_write_partial() {
     close(pipe_fds[0]);
 }
 
-void test_ft_write() {
+void test_ft_write() 
+{
+    printf(YELLOW"\n#################### ft_write #####################\n"RESET);
     test_write_to_stdout();
     test_write_to_stderr();
     test_write_to_file();

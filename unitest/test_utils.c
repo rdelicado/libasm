@@ -1,7 +1,7 @@
 #include "test_utils.h"
 
 void print_test_name(const char *name) {
-    printf(BLUE "== Test: %s ==\n" RESET, name);
+    printf(MAGENTA "== Test: %s ==\n" RESET, name);
 }
 
 void print_pass(void) {

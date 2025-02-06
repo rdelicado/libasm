@@ -1,6 +1,7 @@
 #include "../includes/libasm.h"
 #include "../includes/test_utils.h"
 
+extern void test_ft_strcpy(void);
 extern void test_ft_strlen(void);
 extern void test_ft_write(void);
 
@@ -91,6 +92,7 @@ void    test_write()
 
 int main() 
 {
+    test_ft_strcpy();
     test_ft_strlen();
     test_ft_write();
     test_strlen();

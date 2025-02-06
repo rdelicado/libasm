@@ -13,7 +13,7 @@ section .text
     global ft_strlen
 
 ft_strlen:
-    xor     rax, rax          ; Set counter to 0
+    xor     rax, rax         ; Set counter to 0
 
 .loop:
     cmp byte [rdi + rax], 0   ; Check if current byte is null

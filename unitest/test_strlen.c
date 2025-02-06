@@ -78,7 +78,9 @@ void test_null_terminated_in_middle() {
     }
 }
 
-void test_ft_strlen() {
+void test_ft_strlen() 
+{
+    printf(YELLOW"\n#################### ft_strlen #####################\n"RESET);
     test_empty_string();
     test_single_character();
     test_normal_string();
