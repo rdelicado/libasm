@@ -90,6 +90,72 @@ void    test_write()
     printf("write returned:   %zd, errno: %d\n", ret_sys, saved_errno);
 }
 
+void	test_strcpy(void)
+{
+    printf(BLUE"\n#################### ft_strcpy #####################\n"RESET);
+
+	char dest[50];
+    char *ret;
+
+    printf("\n== Test: Basic copy ==\n");
+    memset(dest, 0, sizeof(dest));
+    errno = 0;
+    ret = ft_strcpy(dest, "Hello, world!");
+    printf("Source: \"%s\"\n", "Hello, world!");
+    printf("Dest:   \"%s\"\n", dest);
+    printf("Return: %p\n", ret);
+
+    printf("\n== Test: Copy empty string ==\n");
+    memset(dest, 'X', sizeof(dest));  // Rellenar para notar el cambio
+    errno = 0;
+    ret = ft_strcpy(dest, "");
+    printf("Source: \"\"\n");
+    printf("Dest:   \"%s\"\n", dest);
+    printf("Return: %p\n", ret);
+
+    printf("\n== Test: Copy large string ==\n");
+    {
+        char *src_large = malloc(10001);
+        char *dest_large = malloc(10001);
+        if (!src_large || !dest_large) {
+            perror("malloc failed");
+            exit(EXIT_FAILURE);
+        }
+        memset(src_large, 'a', 10000);
+        src_large[10000] = '\0';
+        errno = 0;
+        ret = ft_strcpy(dest_large, src_large);
+        printf("Dest (first 20 chars): \"%.20s\"\n", dest_large);
+        printf("String length: %zu\n", strlen(dest_large));
+        printf("Return: %p\n", ret);
+        free(src_large);
+        free(dest_large);
+    }
+
+    printf("\n== Test: Copy with NULL source ==\n");
+    memset(dest, 0, sizeof(dest));
+    errno = 0;
+    ret = ft_strcpy(dest, NULL);
+    int saved_errno = errno;
+    printf("Return: %p, errno: %d (expected errno=14)\n", ret, saved_errno);
+
+    printf("\n== Test: Copy with NULL destination ==\n");
+    errno = 0;
+    ret = ft_strcpy(NULL, "Hello");
+    saved_errno = errno;
+    printf("Return: %p, errno: %d (expected errno=14)\n", ret, saved_errno);
+
+    printf("\n== Test: Copy overlapping memory ==\n");
+    {
+        char overlap[50] = "Overlap test string";
+        errno = 0;
+        // Aunque el comportamiento es indefinido, se prueba para verificar
+        ret = ft_strcpy(overlap + 3, overlap);
+        printf("Buffer: \"%s\"\n", overlap);
+        printf("Return: %p\n", ret);
+    }
+}
+
 int main() 
 {
     test_ft_strcpy();
@@ -97,6 +163,7 @@ int main()
     test_ft_write();
     test_strlen();
     test_write();
+    test_strcpy();
 
     return 0;
 }

@@ -41,7 +41,7 @@ $(OBJ_DIR)/%.o: %.c
 all: $(NAME)
 
 test: $(NAME) $(MAIN_OBJS) $(TEST_OBJS) $(UTIL_OBJS)
-	gcc -no-pie $(MAIN_OBJS) $(TEST_OBJS) $(UTIL_OBJS) -L. -lasm -I$(INC_DIR) -I$(TEST_DIR) -o test
+	gcc -no-pie -g $(MAIN_OBJS) $(TEST_OBJS) $(UTIL_OBJS) -L. -lasm -I$(INC_DIR) -I$(TEST_DIR) -o test
 
 clean:
 	$(RM) -r $(OBJ_DIR)
