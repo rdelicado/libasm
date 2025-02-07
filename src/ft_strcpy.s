@@ -13,7 +13,7 @@ section .text
     global ft_strcpy
     extern __errno_location
 
-ft_strcpy
+ft_strcpy:
     ; Comprobar si dest o src son nulos
     test    rdi, rdi    ; Comprueba si dest en NULL
     je      .error      ; Si es NULL, salta a .error
