@@ -4,6 +4,7 @@
 extern void test_ft_strcpy(void);
 extern void test_ft_strlen(void);
 extern void test_ft_write(void);
+extern void test_ft_strcmp(void);
 
 void    test_strlen()
 {
@@ -156,14 +157,65 @@ void	test_strcpy(void)
     }
 }
 
+void test_strcmp()
+{
+    printf(BLUE"\n#################### ft_strcmp #####################\n"RESET);
+
+    int ret;
+
+    printf("\n== Test: Basic comparison ==\n");
+    ret = ft_strcmp("Hello", "Hello");
+    printf("ft_strcmp(\"Hello\", \"Hello\") = %d\n", ret);
+    ret = strcmp("Hello", "Hello");
+    printf("strcmp(\"Hello\", \"Hello\") = %d\n", ret);
+
+    printf("\n== Test: Different strings ==\n");
+    ret = ft_strcmp("Hello", "World");
+    printf("ft_strcmp(\"Hello\", \"World\") = %d\n", ret);
+    ret = strcmp("Hello", "World");
+    printf("strcmp(\"Hello\", \"World\") = %d\n", ret);
+
+    printf("\n== Test: Empty string vs non-empty string ==\n");
+    ret = ft_strcmp("", "Hello");
+    printf("ft_strcmp(\"\", \"Hello\") = %d\n", ret);
+    ret = strcmp("", "Hello");
+    printf("strcmp(\"\", \"Hello\") = %d\n", ret);
+
+    printf("\n== Test: Non-empty string vs empty string ==\n");
+    ret = ft_strcmp("Hello", "");
+    printf("ft_strcmp(\"Hello\", \"\") = %d\n", ret);
+    ret = strcmp("Hello", "");
+    printf("strcmp(\"Hello\", \"\") = %d\n", ret);
+
+    printf("\n== Test: Both strings empty ==\n");
+    ret = ft_strcmp("", "");
+    printf("ft_strcmp(\"\", \"\") = %d\n", ret);
+    ret = strcmp("", "");
+    printf("strcmp(\"\", \"\") = %d\n", ret);
+
+    printf("\n== Test: Strings with special characters ==\n");
+    ret = ft_strcmp("Hello\n", "Hello\t");
+    printf("ft_strcmp(\"Hello\\n\", \"Hello\\t\") = %d\n", ret);
+    ret = strcmp("Hello\n", "Hello\t");
+    printf("strcmp(\"Hello\\n\", \"Hello\\t\") = %d\n", ret);
+
+    printf("\n== Test: Strings with embedded null characters ==\n");
+    ret = ft_strcmp("Hello\0World", "Hello\0Worle");
+    printf("ft_strcmp(\"Hello\\0World\", \"Hello\\0Worle\") = %d\n", ret);
+    ret = strcmp("Hello\0World", "Hello\0Worle");
+    printf("strcmp(\"Hello\\0World\", \"Hello\\0Worle\") = %d\n", ret);
+}
+
 int main() 
 {
+    test_ft_strcmp();
     test_ft_strcpy();
     test_ft_strlen();
     test_ft_write();
     test_strlen();
     test_write();
     test_strcpy();
+    test_strcmp();
 
     return 0;
 }

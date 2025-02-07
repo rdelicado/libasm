@@ -108,8 +108,10 @@ void test_strcpy_overlap() {
 }
 
 // Función principal para ejecutar todas las pruebas
-void test_ft_strcpy() {
+void test_ft_strcpy() 
+{
     printf(YELLOW"\n#################### ft_strcpy #####################\n"RESET);
+    
     test_strcpy_basic();
     test_strcpy_empty_string();
     test_strcpy_large_string();
