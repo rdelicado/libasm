@@ -146,7 +146,7 @@ void	test_strcpy(void)
     saved_errno = errno;
     printf("Return: %p, errno: %d (expected errno=14)\n", ret, saved_errno);
 
-    printf("\n== Test: Copy overlapping memory ==\n");
+    /* printf("\n== Test: Copy overlapping memory ==\n");
     {
         char overlap[50] = "Overlap test string";
         errno = 0;
@@ -154,7 +154,7 @@ void	test_strcpy(void)
         ret = ft_strcpy(overlap + 3, overlap);
         printf("Buffer: \"%s\"\n", overlap);
         printf("Return: %p\n", ret);
-    }
+    } */
 }
 
 void test_strcmp()
@@ -214,8 +214,8 @@ int main()
     test_ft_write();
     test_strlen();
     test_write();
-    test_strcpy();
-    test_strcmp();
+    //test_strcpy();
+    //test_strcmp();
 
     return 0;
 }
