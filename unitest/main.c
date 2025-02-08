@@ -214,7 +214,7 @@ int main()
     test_ft_write();
     test_strlen();
     test_write();
-    //test_strcpy();
+    //test_strcpy(); quitar comentario para probar strcpy
     //test_strcmp();
 
     return 0;
