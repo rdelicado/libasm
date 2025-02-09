@@ -14,4 +14,9 @@ void print_test_name(const char *name);
 void print_pass(void);
 void print_fail(const char *message);
 
+void test_ft_strcpy();
+void test_ft_strlen();
+void test_ft_write();
+void test_ft_strcmp();
+
 #endif
