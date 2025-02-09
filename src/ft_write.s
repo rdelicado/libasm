@@ -16,11 +16,6 @@ section .text
     extern __errno_location
 
 ft_write:
-    ; Configurar registros para la syscall write:
-    ; rdi: descriptor de archivo (fd)
-    ; rsi: puntero al buffer (buf)
-    ; rdx: número de bytes a escribir (count)
-    ; Nota: Estos argumentos vienen ya cargados en los registros.
     mov     rax, 1      ; Número de syscall para write (1 = write)
     syscall             ; Invoca la syscall
 
