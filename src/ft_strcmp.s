@@ -22,32 +22,32 @@ ft_strcmp:
     test    rsi, rsi 
     je      .error
 
-    xor     rcx, rcx    ; indice
+    xor     rcx, rcx    ; index
 
 .loop:
-    mov     al, byte [rdi + rcx]    ; Cargar caracter de s1
-    mov     bl, byte [rsi + rcx]    ; Cargar caracter de s2
-    cmp     al, bl                  ; Comparamos los dos caracteres
-    jne     .diff                   ; Si no son iguales, calculamos diferencia
-    cmp     al, 0                   ; Si al es nulo, fin de la cadena
+    mov     al, byte [rdi + rcx]    ; Load character from s1
+    mov     bl, byte [rsi + rcx]    ; Load character from s2
+    cmp     al, bl                  ; Compare the two characters
+    jne     .diff                   ; If not equal, calculate difference
+    cmp     al, 0                   ; If al is null, end of string
     je      .end
     inc     rcx
     jmp     .loop
 
 .diff:
-    movzx   eax, al     ; movzx para evitar sign extension
+    movzx   eax, al     ; movzx to avoid sign extension
     movzx   ebx, bl
     sub     eax, ebx    ; EAX = s1[i] - s2[i]
     ret
 
 .error:
-    call    __errno_location wrt ..plt  ; Obtiene la dirección de errno
-    mov     dword [rax], 14             ; Asigna EFAULT (14) a errno
-    xor     rax, rax                    ; Devuelve NULL
+    call    __errno_location wrt ..plt  ; Get the address of errno
+    mov     dword [rax], 14             ; Set EFAULT (14) to errno
+    xor     rax, rax                    ; Return NULL
     ret
 
 .end:
-    xor     eax, eax    ; Retorna 0 (cadenas iguales)
+    xor     eax, eax    ; Return 0 (strings are equal)
     ret
 
     section .note.GNU-stack noalloc noexec nowrite progbits

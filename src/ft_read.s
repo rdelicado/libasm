@@ -1,36 +1,40 @@
 ; Function: ft_read
 ; int read(int fd, void *buf, size_t count);
-; Brief: function reads up to count bytes from file descriptor fd into the buffer starting at buf.
+; Brief: Reads up to count bytes from file descriptor fd into the buffer pointed by buf.
 ; Registers:
 ;   - rdi: File descriptor
-;   - rsi: Buffer
-;   - rdx: Count
-;   - rax: Return an integer
+;   - rsi: Buffer pointer
+;   - rdx: Count of bytes to read
+;   - rax: Returns the number of bytes read on success or -1 on error
 ; Algorithm:
-;  Loop through each character until count is reached.
-;  Then return the number of characters read in rax.
-
+;  1. Execute syscall to perform read.
+;  2. If the return value in rax is negative, an error occurred.
+;  3. In case of error, convert the negative result to a positive error code 
+;     and store it in errno, then return -1.
+;  4. Otherwise, return the number of bytes read.
 section .text
     global ft_read
     extern __errno_location
 
 ft_read:
-    mov     rax, 0      ; Número de syscall para read (0 = read)
-    syscall             ; Invoca la syscall
+    ; Initialize rax to 0 so that syscall can use it appropriately.
+    mov     rax, 0      
+    syscall             
 
-    ; Comprobación de error: si rax es negativo, ocurrió un error.
+    ; Error checking: if rax is negative, an error occurred.
     cmp     rax, 0
-    jge     .end      ; Si rax >= 0, todo bien, salta a .end
+    jge     .end       ; If rax >= 0, read was successful, jump to .end
 
 .error:
-    mov     r8, rax    ; Guarda el error (valor negativo) en r8
-    neg     r8         ; r8 = -rax: error positivo (ej. EBADF = 9)
-    call    __errno_location wrt ..plt  ; Obtiene la dirección de errno en rax
-    mov     dword [rax], r8d             ; Asigna el error correcto a errno
-    mov     rax, -1                     ; Devuelve -1 para indicar error
+    mov     r8, rax    ; Save the negative error value in r8
+    neg     r8         ; Convert error to positive (e.g., EBADF = 9)
+    ; Obtain the address of errno and store the positive error value there
+    call    __errno_location wrt ..plt
+    mov     dword [rax], r8d             
+    mov     rax, -1    ; Set return value to -1 to indicate failure
     ret
 
 .end:
-    ret               ; Retorna al llamador
+    ret              ;
 
 section .note.GNU-stack noalloc noexec nowrite progbits

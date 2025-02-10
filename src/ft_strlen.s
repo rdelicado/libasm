@@ -11,15 +11,24 @@
 
 section .text
     global ft_strlen
+    extern __errno_location
 
 ft_strlen:
-    xor     rax, rax         ; Set counter to 0
+    test    rdi, rdi            ; Check if pointer is NULL
+    je      .error
+    xor     rax, rax            ; Set counter to 0
 
 .loop:
     cmp byte [rdi + rax], 0   ; Check if current byte is null
     je  .end                ; If null, exit loop
     inc rax                 ; Increase counter
     jmp .loop               ; Continue scanning
+
+.error:
+    call    __errno_location wrt ..plt  ; Get the address of errno
+    mov     dword [rax], 14             ; Set EFAULT (14) to errno
+    xor     rax, rax                    ; Return 0
+    ret
 
 .end:
     ret                     ; Return to caller

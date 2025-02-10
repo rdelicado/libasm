@@ -14,32 +14,31 @@ section .text
     extern __errno_location
 
 ft_strcpy:
-    ; Comprobar si dest o src son nulos
-    test    rdi, rdi    ; Comprueba si dest en NULL
-    je      .error      ; Si es NULL, salta a .error
+    ; Check if dest or src are null
+    test    rdi, rdi    
+    je      .error      
     test    rsi, rsi    
     je      .error
 
-    xor rcx, rcx        ; Inicializa rcx a 0 (indice)
+    xor rcx, rcx                ; Initialize rcx (counter) to 0 (index)
 
 .loop:
-    mov al, byte [rsi + rcx]  ; lee un byte de rsi (dest) y almacena en ld (8 bytes)
-    mov byte [rdi + rcx], al  ; Copia en rdi el valor de ld
-    cmp al, 0           ; Compara si el byte es 0 (NULL)
-    je  .end            ; Si es 0 finaliza
-    inc rcx             ; incrementa el indice rcx para leer el siguiente byte del src
-    jmp .loop           ; Salta de nuevo al inicio
-
-.error:
-    call    __errno_location wrt ..plt  ; Obtiene la dirección de errno
-    mov     dword [rax], 14             ; Asigna EFAULT (14) a errno
-    xor     rax, rax                    ; Devuelve NULL
-    ret
+    mov al, byte [rsi + rcx]    ; Read a byte from rsi (src) and store in al
+    mov byte [rdi + rcx], al    ; Copy to rdi the value of al
+    cmp al, 0                   ; Check if the byte is 0 (NULL)
+    je  .end                    ; If 0, end
+    inc rcx                     ; Increment the index rcx to read the next byte from src
+    jmp .loop                   ; Jump back to the beginning
 
 .end:
-    mov rax, rdi
+    mov rax, rdi                ; Return the destination pointer
+    ret
+
+.error:
+    call    __errno_location wrt ..plt  ; Get the address of errno
+    mov     dword [rax], 14             ; Set EFAULT (14) to errno
+    xor     rax, rax                    ; Return NULL
     ret
 
 section .note.GNU-stack noalloc noexec nowrite progbits
 
-    
