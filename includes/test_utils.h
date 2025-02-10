@@ -19,5 +19,6 @@ void test_ft_strlen();
 void test_ft_write();
 void test_ft_strcmp();
 void test_ft_read();
+void test_ft_strdup();
 
 #endif
