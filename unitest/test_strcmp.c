@@ -166,19 +166,19 @@ void test_strcmp_null_pointer_s1()
     const char *s2 = "hola";
     errno = 0; // Limpiar errno antes de la prueba
     int result = ft_strcmp(s1, s2);
-    if (result != 0 || errno != EFAULT) 
+    if (result != -1 || errno != EFAULT) 
     {
-        print_fail("Expected 0 return and errno = EFAULT for null s1.");
+        print_fail("Expected -1 return and errno = EFAULT for null s1.");
         printf("Result: ft_strcmp(\"%s\", \"%s\") = %d\n", s1, s2, result);
         printf("errno after ft_strcmp: %d\n", errno); 
-        printf("Expected: 0\tErrno = EFAULT(14)\n");
+        printf("Expected: -1\tErrno = EFAULT(14)\n");
     } 
     else 
     {
         print_pass();
         printf("Result: ft_strcmp(\"%s\", \"%s\") = %d\n", s1, s2, result);
         printf("errno after ft_strcmp: %d\n", errno); 
-        printf("Expected: 0\tErrno = EFAULT(14)\n");
+        printf("Expected: -1\tErrno = EFAULT(14)\n");
     }
 }
 
@@ -189,18 +189,18 @@ void test_strcmp_null_pointer_s2()
     const char *s2 = NULL;
     errno = 0; // Limpiar errno antes de la prueba
     int result = ft_strcmp(s1, s2);
-    if (result != 0 || errno != EFAULT) 
+    if (result != -1 || errno != EFAULT) 
     {
-        print_fail("Expected 0 return and errno = EFAULT for null s2.");
+        print_fail("Expected -1 return and errno = EFAULT for null s2.");
         printf("Result: ft_strcmp(\"%s\", \"%s\") = %d\n", s1, s2, result);
         printf("errno after ft_strcmp: %d\n", errno);
-        printf("Expected: 0\tErrno = EFAULT(14)\n");
+        printf("Expected: -1\tErrno = EFAULT(14)\n");
     } 
     else 
     {
         print_pass();
         printf("Result: ft_strcmp(\"%s\", \"%s\") = %d\n", s1, s2, result);
-        printf("Expected: 0\tErrno = EFAULT(14)\n");
+        printf("Expected: -1\tErrno = EFAULT(14)\n");
     }
 }
 
@@ -211,19 +211,19 @@ void test_strcmp_both_null_pointers()
     const char *s2 = NULL;
     errno = 0; // Limpiar errno antes de la prueba
     int result = ft_strcmp(s1, s2);
-    if (result != 0 || errno != EFAULT) 
+    if (result != -1 || errno != EFAULT) 
     {
-        print_fail("Expected 0 return and errno = EFAULT for both null pointers.");
+        print_fail("Expected -1 return and errno = EFAULT for both null pointers.");
         printf("Result: ft_strcmp(\"%s\", \"%s\") = %d\n", s1, s2, result);
         printf("errno after ft_strcmp: %d\n", errno);
-        printf("Expected: 0\tErrno = EFAULT(14)\n");
+        printf("Expected: -1\tErrno = EFAULT(14)\n");
     } 
     else 
     {
         print_pass();
         printf("Result: ft_strcmp(\"%s\", \"%s\") = %d\n", s1, s2, result);
         printf("errno after ft_strcmp: %d\n", errno);
-        printf("Expected: 0\tErrno = EFAULT(14)\n");
+        printf("Expected: -1\tErrno = EFAULT(14)\n");
     }
 }
 
