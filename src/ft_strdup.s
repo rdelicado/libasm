@@ -1,5 +1,7 @@
 ; Function: ft_strdup
 ; char *ft_strdup(const char *s);
+; size_t ft_strlen(const char *s);
+; void *malloc(size_t size);
 ; Brief: Allocates enough memory for a copy of the string s, copies it, and returns the pointer.
 ; Registers:
 ;   - rdi: Source string pointer
@@ -39,7 +41,7 @@ ft_strdup:
     call    ft_strlen   ; returns length in rax
 
     ; Add 1 for the null terminator
-    inc     rax       ; rax = length + 1
+    inc     rax       ; rax = length + 1 ('\0' terminator)
 
     ; Move the size into rdi for malloc
     mov     rdi, rax  ; argument for malloc = (length+1)
@@ -50,9 +52,12 @@ ft_strdup:
     jz      .error
 
     ; Setup for ft_strcpy:
-    ;     Destination: allocated pointer (in rax)
-    ;     Source: original pointer (in rbx)
-    pop     rsi      ; source pointer
+    ; Destination: allocated pointer (in rax)
+    ; Source: original pointer (retrieved from the stack into rsi)
+    ; void *ft_strcpy(void *dest, const void *src);
+    ; rsi = source pointer (original string rdi stack), second argument
+    ; rdi = destination pointer (allocated memory in rax), first argument
+    pop     rsi      ; source pointer, recuperar el puntero original (rdi)
     mov     rdi, rax ; destination pointer
     call    ft_strcpy
 

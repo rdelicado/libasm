@@ -15,12 +15,12 @@ section .text
 
 ft_strcpy:
     ; Check if dest or src are null
-    test    rdi, rdi    
-    je      .error      
-    test    rsi, rsi    
-    je      .error
+    test    rdi, rdi    ; s1 = NULL?
+    je      .error      ; If NULL, go to error
+    test    rsi, rsi    ; s2 = NULL?
+    je      .error      ; If NULL, go to error
 
-    xor rcx, rcx                ; Initialize rcx (counter) to 0 (index)
+    xor rcx, rcx                ; counter rcx = 0, index for src and dest
 
 .loop:
     mov al, byte [rsi + rcx]    ; Read a byte from rsi (src) and store in al
