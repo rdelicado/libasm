@@ -1,5 +1,7 @@
 # libasm
 
+wiki [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/rdelicad/libasm)
+
 This project implements assembly versions of some basic functions from the C standard library. The provided functions are:
 
 - `ft_strlen`: Calculates the length of a string.
@@ -82,4 +84,4 @@ make fclean
 Enjoy exploring and enhancing the project!
 ```
 
-wiki [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/rdelicad/libasm)
+
