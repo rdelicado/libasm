@@ -81,3 +81,5 @@ make fclean
 
 Enjoy exploring and enhancing the project!
 ```
+
+wiki [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/rdelicad/libasm)
