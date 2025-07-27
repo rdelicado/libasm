@@ -1,87 +1,110 @@
-# libasm
+# Libasm
 
-wiki [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/rdelicad/libasm)
+[![42 School](https://img.shields.io/badge/42-School-000000?style=flat&logo=42&logoColor=white)](https://42.fr/)
+[![Language](https://img.shields.io/badge/Language-C-blue.svg)](https://en.wikipedia.org/wiki/C_(programming_language))
+[![Assembly](https://img.shields.io/badge/Assembler-NASM-green.svg)](https://www.nasm.us/)
 
-This project implements assembly versions of some basic functions from the C standard library. The provided functions are:
+## 📖 Overview
 
-- `ft_strlen`: Calculates the length of a string.
-- `ft_strcmp`: Compares two strings.
-- `ft_strcpy`: Copies a string.
-- `ft_write`: Writes up to `count` bytes from a buffer to a file descriptor.
-- `ft_read`: Reads up to `count` bytes from a file descriptor into a buffer.
-- `ft_strdup`: Duplicates a string.
+**Libasm** is a small library implementing common C standard functions in x86_64 Assembly (NASM). This project demonstrates low-level system call usage, memory manipulation, and string routines written from scratch. It is a core exercise in systems programming and assembly language mastery.
 
-The assembly functions are written in NASM and are located in the [`src`](src) directory, while the tests (written in C) are located in the [`unitest`](unitest) directory.
+## 🔍 Implemented Functions
 
-## Project Structure
+The following functions, originally from `libc`, are reimplemented in assembly:
+
+- `ft_strlen`   — Calculate the length of a null-terminated string
+- `ft_strcmp`   — Compare two strings lexicographically
+- `ft_strcpy`   — Copy a string including its terminating null byte
+- `ft_read`     — Read up to `count` bytes from a file descriptor
+- `ft_write`    — Write up to `count` bytes to a file descriptor
+- `ft_strdup`   — Duplicate a string by allocating memory
+
+Function prototypes are declared in `includes/libasm.h`.
+
+## 🗂️ Project Structure
 
 ```
-Makefile
-includes/
-    ├── libasm.h
-    └── test_utils.h
-obj/
-src/
-    ├── ft_read.s
-    ├── ft_strcmp.s
-    ├── ft_strcpy.s
-    ├── ft_strdup.s
-    ├── ft_strlen.s
-    └── ft_write.s
-unitest/
-    ├── main.c
-    ├── test_read.c
-    ├── test_strcmp.c
-    ├── test_strcpy.c
-    ├── test_strdup.c
-    ├── test_strlen.c
-    ├── test_utils.c
-    └── test_write.c
+libasm/
+├── Makefile              # Build and test rules
+├── includes/
+│   └── libasm.h          # Public API headers
+├── src/                  # Assembly source files (.s)
+│   ├── ft_strlen.s
+│   ├── ft_strcmp.s
+│   ├── ft_strcpy.s
+│   ├── ft_read.s
+│   ├── ft_write.s
+│   └── ft_strdup.s
+├── unitest/              # C-based unit tests
+│   ├── main.c
+│   ├── test_strlen.c
+│   ├── test_strcmp.c
+│   ├── test_strcpy.c
+│   ├── test_read.c
+│   ├── test_write.c
+│   ├── test_strdup.c
+│   └── utils.c           # Test helpers
+└── obj/                  # Compiled object files
 ```
 
-## How to Compile
+## 🚀 Getting Started
 
-To compile the assembly library and generate `libasm.a`, run:
+### Prerequisites
+
+- GNU Make
+- NASM (Netwide Assembler)
+- GCC (with 64-bit support)
+
+### Building the Library
 
 ```sh
-make
+make all        # Assemble and archive libasm.a
 ```
 
-## Running the Tests
-
-First, ensure you have compiled the library. Then compile the test executable and link it with the library by running:
+### Running Tests
 
 ```sh
-make test
+make test       # Build and run unit tests
 ```
 
-This will create an executable named `test`. Run it with:
+All tests must pass before submitting your code.
+
+### Cleaning Up
 
 ```sh
-./test
+make clean      # Remove object files and test binaries
+make fclean     # Remove archive libasm.a as well
 ```
 
-## Cleaning the Build
+## 🛠️ Usage in Your Project
 
-To remove the object files and the test executable, run:
+Include the header and link against `libasm.a`:
+
+```c
+#include "libasm.h"
+
+int main(void) {
+    const char *s = "Hello, World!";
+    size_t len = ft_strlen(s);
+    ft_write(1, s, len);
+    return 0;
+}
+```
 
 ```sh
-make clean
+gcc -Iincludes -L. -lasm your_program.c -o your_program
 ```
 
-To remove the library `libasm.a` as well, run:
+## 📚 Contributing
 
-```sh
-make fclean
-```
+- Follow the 42 Norm for coding style.
+- Ensure all new functions have accompanying tests.
+- Submit pull requests for review with clear descriptions.
 
-## Additional Notes
+## 👤 Author
 
-- The project uses NASM with flags such as `-f elf64`, `-g`, and `-F dwarf` for compiling the assembly files.
-- The `ft_write` function (see [src/ft_write.s](src/ft_write.s)) demonstrates how to use system calls in assembly and includes error handling by setting `errno` appropriately.
-- The tests are written in C and verify the correct behavior of each assembly function.
+**Rubén Delicado** — [@rdelicado](https://github.com/rdelicado)
 
-Enjoy exploring and enhancing the project!
-```
+## 📜 License
 
-
+This project is part of the 42 School curriculum and is intended for educational purposes. All code follows academic integrity guidelines.
